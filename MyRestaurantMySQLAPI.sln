@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "MyRestaurantMySQLAPI", "MyRestaurantMySQLAPI.njsproj", "{B8889406-2AF4-4BB6-AC32-0E2D8D9E06A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8889406-2AF4-4BB6-AC32-0E2D8D9E06A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8889406-2AF4-4BB6-AC32-0E2D8D9E06A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8889406-2AF4-4BB6-AC32-0E2D8D9E06A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8889406-2AF4-4BB6-AC32-0E2D8D9E06A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A016509-A992-4C78-BB0C-E96091E4A53A}
+	EndGlobalSection
+EndGlobal
