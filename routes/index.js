@@ -4,7 +4,7 @@ var express = require('express')
 var router = express.Router()
 var moment = require('moment')
 
-var crypto = require('crypto');
+//var crypto = require('crypto');
 //var uuid = require('uuid')
 
 //var con = mysql.createConnection({
@@ -17,7 +17,7 @@ var crypto = require('crypto');
 
 
 //password ultil
-var genRandomString = function (length) {
+/*var genRandomString = function (length) {
     return crypto.randomBytes(Math.ceil(length/2))
         .toString('hex')// convert to hexa format
         .slice(0, length); //return required number of characters
@@ -41,11 +41,11 @@ function saltHashPassword(userPassword) {
 function checkHashPassword(userPassword, salt) {
     var passwordData = sha512(userPassword, salt);
     return passwordData;
-}
+}*/
 
 //register err
 //change /register/
-router.post('/user/', (req, res, next) => {
+/*router.post('/users/', (req, res, next) => {
     console.log(req.body)
     if (req.body.key == API_KEY) {
         var post_data = req.body; // get POST params
@@ -92,7 +92,7 @@ router.post('/user/', (req, res, next) => {
     else {
         res.send(JSON.stringify({ success: false, message: "Wrong APi key" }))
     }
-})
+})*/
 //
 //router.get("/", (req, res, next) => {
 //    console.log('Password: 123456');
@@ -101,7 +101,7 @@ router.post('/user/', (req, res, next) => {
 //    console.log('Salt:' + encrypt.salt);
 //})
 //
-router.post('/login/', (req, res, next) => {
+/*router.post('/login/', (req, res, next) => {
     var post_data = req.body;
     //extract email and password from request
     var user_password = post_data.password;
@@ -127,7 +127,7 @@ router.post('/login/', (req, res, next) => {
             }
         });
     })
-})
+})*/
 
 
 
@@ -176,9 +176,41 @@ router.get('/user', function (req, res, next) {
         res.send(JSON.stringify({ success: false, message: "Wrong APi key" }))   
     }        
 })
+router.post('/user', function (req, res, next) {
+    console.log(req.query);
+    if (req.body.key == API_KEY) {
+        var fbid = req.body.fbid
+        var user_phone = req.body.UserPhone
+        var user_name= req.body.userName
+        var user_address = req.body.userAddress
+
+        if (fbid != null) {
+            req.getConnection(function (error, conn) {
+                conn.query('INSERT INTO User(FBID,UserPhone,Name,Address) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE Name=?,Address=?', [fbid,user_phone,user_name,user_address,user_name,user_address], function (err, rows, fields) {
+                    if (err) {
+                        res.status(500)
+                        res.send(JSON.stringify({ success: false, message: err.message }))
+                    }
+                    else {
+                        if (rows.affectedRows > 0) {
+                            res.send(JSON.stringify({ success: true, message: "Success" }))
+                        }
+                    
+                    }
+                })
+            })
+        }
+        else {
+            res.send(JSON.stringify({ success: false, message: "Missing fbid in body" }))
+        }
+    }
+    else {
+        res.send(JSON.stringify({ success: false, message: "Wrong APi key" }))   
+    }        
+})
 
 
-router.post('/register/', (req, res, next) => {
+/*router.post('/register/', (req, res, next) => {
     console.log(req.body)
     if (req.body.key == API_KEY) {
         var post_data = req.body; // get POST params
@@ -231,7 +263,7 @@ router.post('/register/', (req, res, next) => {
     else {
         res.send(JSON.stringify({ success: false, message: "Clave APi incorrecta" }))
     }        
-})
+})*/
 
 //==========================================    
 //FAVORITE TABLE
