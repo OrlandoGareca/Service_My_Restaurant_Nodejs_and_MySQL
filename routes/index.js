@@ -408,7 +408,7 @@ router.get('/restaurant', function (req, res, next) {
       
        
             req.getConnection(function (error, conn) {
-                conn.query('SELECT name,address,phone,lat,lng,userOwner,image,paymentUrl FROM Restaurant', function (err, rows, fields) {
+                conn.query('SELECT id,name,address,phone,lat,lng,userOwner,image,paymentUrl FROM Restaurant', function (err, rows, fields) {
                     if (err) {
                         res.status(500)
                         res.send(JSON.stringify({ success: false, message: err.message }))
@@ -439,7 +439,7 @@ router.get('/restaurantById', function (req, res, next) {
         req.getConnection(function (error, conn) {
             var restaurant_id = req.query.restaurantId
             if (restaurant_id != null) {
-                conn.query('SELECT name,address,phone,lat,lng,userOwner,image,paymentUrl FROM Restaurant WHERE id=?', [restaurant_id], function (err, rows, fields) {
+                conn.query('SELECT id,name,address,phone,lat,lng,userOwner,image,paymentUrl FROM Restaurant WHERE id=?', [restaurant_id], function (err, rows, fields) {
                     if (err) {
                         res.status(500)
                         res.send(JSON.stringify({ success: false, message: err.message }))
